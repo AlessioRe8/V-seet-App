@@ -1,7 +1,10 @@
 package it.unicam.ids.Vseet.Controller;
 
 import it.unicam.ids.Vseet.Model.Entities.POI.PointOfInterest;
+import it.unicam.ids.Vseet.Model.Entities.Position;
 import it.unicam.ids.Vseet.Model.Repositories.POIRepository;
+import it.unicam.ids.Vseet.Model.Services.POIService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/poi")
 public class POIController implements SpringController<PointOfInterest, Long> {
 
-    private POIRepository poiRepository;
+    private final POIService poiService;
 
-    public POIController(POIRepository poiRepository) {
-        this.poiRepository = poiRepository;
+    @Autowired
+    public POIController(POIService poiService) {
+        this.poiService = poiService;
     }
 
     @Override

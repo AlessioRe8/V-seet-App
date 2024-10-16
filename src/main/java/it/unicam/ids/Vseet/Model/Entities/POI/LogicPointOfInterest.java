@@ -1,73 +1,60 @@
 package it.unicam.ids.Vseet.Model.Entities.POI;
 
-import it.unicam.ids.Vseet.Model.Entities.Comune;
-import it.unicam.ids.Vseet.Model.Entities.ContentCategory;
-import it.unicam.ids.Vseet.Model.Entities.Position;
-import it.unicam.ids.Vseet.Model.Entities.User;
+import it.unicam.ids.Vseet.Model.Entities.*;
 import jakarta.persistence.*;
 
 @Entity
-public class LogicPointOfInterest implements PointOfInterest {
+public class LogicPointOfInterest extends Content implements PointOfInterest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     private String name;
     private String description;
     private ContentCategory category;
+    @Embedded
+    private Position position;
+    @ManyToOne
+    private User creator;
 
-    public LogicPointOfInterest(String name, String description, ContentCategory category, User creator, Comune comune, Position position) {
+    public LogicPointOfInterest(String name, String description, ContentCategory category, User creator, Position position) {
+        super();
         this.name = name;
         this.description = description;
         this.category = category;
         this.creator = creator;
-        this.comune = comune;
         this.position = position;
     }
 
     public LogicPointOfInterest() {
+        super();
     }
-
-    @ManyToOne
-    private User creator;
-    @ManyToOne
-    private Comune comune;
-    @Embedded
-    private Position position;
-
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public Long getId() {
         return ID;
     }
-    @Override
-    public String getDescription() {
-        return description;
-    }
 
     @Override
-    public Position getPosition() {
-        return position;
+    public void approve() {
+        setApproved(true);
     }
-
     @Override
     public String getType() {
         return "Logic";
     }
 
-    @Override
-    public Comune getComune() {
-        return comune;
+    public String getDescription() {
+        return description;
     }
 
-    @Override
+    public Position getPosition() {
+        return position;
+    }
     public User getCreator() {
         return creator;
     }
-    @Override
     public ContentCategory getCategory(){
         return category;
     }

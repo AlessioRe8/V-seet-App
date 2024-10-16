@@ -1,7 +1,6 @@
 package it.unicam.ids.Vseet.Model.Entities;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 
 @Embeddable
 public class Position {

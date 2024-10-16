@@ -2,7 +2,8 @@ package it.unicam.ids.Vseet.Model.Entities;
 
 import jakarta.persistence.*;
 
-//TODO POTREBBE ESSERE LEVATA!!!
+import java.time.LocalDateTime;
+
 @Entity
 public abstract class Content {
     @Id
@@ -11,55 +12,67 @@ public abstract class Content {
 
     private String name;
     private String description;
-    @Embedded
-    private Position position;
     @ManyToOne
-    User creator;
-    @ManyToOne
-    Comune comune;
+    private User creator;
+    private LocalDateTime creationDate;
+    private boolean approved = false;
+    private ContentCategory contentCategory;
 
-    public Content(String name, String description, User creator,Position position, Comune comune) {
+    public Content(String name, String description, User creator) {
+        this.creationDate = LocalDateTime.now();
         this.name = name;
         this.description = description;
         this.creator = creator;
-        this.position = position;
-        this.comune = comune;
     }
 
-    protected Content(){};
+    protected Content(){
+        this.creationDate = LocalDateTime.now();
+    };
 
-    public enum ContentState {
-        PENDING,
-        APPROVED,
-        DENIED
+    public abstract void approve();
+
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 
     public Long getID() {
         return ID;
     }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public Comune getComune() {
-        return comune;
-    }
-
     public User getCreator() {
         return creator;
     }
-
-    public void setComune(Comune comune) {
-        this.comune = comune;
-    }
-
     public void setCreator(User creator) {
         this.creator = creator;
     }
-
-    public void setPosition(Position position) { this.position = position;
+    public ContentCategory getContentCategory() {
+        return contentCategory;
+    }
+    public void setContentCategory(ContentCategory contentCategory) {
+        this.contentCategory = contentCategory;
     }
 
 }

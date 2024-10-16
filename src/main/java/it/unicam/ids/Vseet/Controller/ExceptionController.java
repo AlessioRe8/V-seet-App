@@ -14,12 +14,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(ContentNotFoundException.class)
     public ResponseEntity<String> handleContentNotFound(ContentNotFoundException exception) {
         return new ResponseEntity<>("Content not found.", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> handleUserNotFound(UserNotFoundException exception) {
         return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
     }

@@ -1,33 +1,31 @@
 package it.unicam.ids.Vseet.Model.Entities;
 
 import jakarta.persistence.*;
+import it.unicam.ids.Vseet.Model.Entities.POI.PointOfInterest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Itinerary<Content>{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
-    private String name;
-    private String description;
-    @ManyToOne
-    private User creator;
+public class Itinerary extends Content{
+    @OneToMany
+    private List<Content> points;
 
-    @ManyToMany
-    private final List<Content> contents = new ArrayList<>();
-
-    public Itinerary(String name, String description, User creator) {
-        this.name = name;
-        this.description = description;
-        this.creator = creator;
+    public Itinerary(String name, String description, User creator, List<Content> points) {
+        super(name, description, creator);
+        this.points = points;
     }
 
     protected Itinerary() {
+        super();
     }
 
-    public List<Content> getContents() {
-        return contents;
+    @Override
+    public void approve() {
+        setApproved(true);
+    }
+
+    public List<Content> getPoints() {
+        return points;
     }
 }
