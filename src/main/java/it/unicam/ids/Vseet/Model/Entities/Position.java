@@ -1,6 +1,7 @@
 package it.unicam.ids.Vseet.Model.Entities;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 
 @Embeddable
 public class Position {
@@ -8,14 +9,14 @@ public class Position {
     private double latitude;
 
     private double longitude;
-    //TODO e se la posizione avesse all'interno il suo comune (con relativo design pattern per vedere se la posizione è nell'area.
     private Comune comune;
 
     public Position() {}
 
-    public Position(double latitude, double longitude) {
+    public Position(double latitude, double longitude, Comune comune) {
         this.latitude = latitude;
         this.longitude = longitude;
+        this.comune = comune;
     }
 
     public double getLatitude() {
