@@ -16,11 +16,11 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ContentNotFoundException.class)
     public ResponseEntity<String> handleContentNotFound(ContentNotFoundException exception) {
-        return new ResponseEntity<>("Content not found.", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> handleUserNotFound(UserNotFoundException exception) {
-        return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

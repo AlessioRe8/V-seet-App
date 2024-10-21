@@ -10,5 +10,4 @@ import java.util.Optional;
 
 @Repository
 public interface ContentRepository extends CrudRepository<Content, Long> {
-    Optional<Content> findByID(Long id);
 }

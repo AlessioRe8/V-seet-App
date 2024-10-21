@@ -27,8 +27,8 @@ public class UserController implements SpringController<User, Long> {
     }
 
     @Override
-    public ResponseEntity<?> getById(Long aLong) {
-        return null;
+    public ResponseEntity<?> getById(Long id) {
+        return ResponseEntity.ok(userRepository.findById(id));
     }
 
     @Override

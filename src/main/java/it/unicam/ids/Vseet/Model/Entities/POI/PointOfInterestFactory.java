@@ -11,9 +11,9 @@ public class PointOfInterestFactory {
                                             ContentCategory category, User creator,
                                             Position position) {
         if ("CONCRETE".equalsIgnoreCase(type)) {
-            return new ConcretePointOfInterest(name, description, category, creator, position);
+            return new ConcretePointOfInterest(name, description, creator, category, position);
         } else if ("LOGIC".equalsIgnoreCase(type)) {
-            return new LogicPointOfInterest(name, description, category, creator, position);
-        } else throw new IllegalArgumentException("Unknown type or not defined.");
+            return new LogicPointOfInterest(name, description,  creator, category,position);
+        } else throw new IllegalArgumentException("Unknown or not defined point of interest type.");
     }
 }

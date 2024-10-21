@@ -11,9 +11,9 @@ public class Itinerary extends Content{
     @OneToMany
     private List<Content> points;
 
-    public Itinerary(String name, String description, User creator, List<Content> points) {
-        super(name, description, creator);
-        this.points = points;
+    public Itinerary(String name, String description, User creator, ContentCategory contentCategory) {
+        super(name, description, creator, contentCategory);
+        this.points = new ArrayList<>();
     }
 
     protected Itinerary() {

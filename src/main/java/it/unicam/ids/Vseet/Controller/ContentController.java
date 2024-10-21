@@ -1,48 +1,39 @@
 package it.unicam.ids.Vseet.Controller;
 
-import it.unicam.ids.Vseet.Model.Entities.Content;
+import it.unicam.ids.Vseet.Model.Entities.ContentDTO;
+import it.unicam.ids.Vseet.Model.Entities.User;
+import it.unicam.ids.Vseet.Model.Entities.UserRole;
 import it.unicam.ids.Vseet.Model.Services.ContentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import it.unicam.ids.Vseet.Model.Services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/contents")
-public class ContentController implements SpringController<Content, Long>{
+public class ContentController {
     private ContentService contentService;
+    private UserService userService;
 
-    public ContentController(ContentService contentService){
+    public ContentController(ContentService contentService, UserService userService) {
         this.contentService = contentService;
+        this.userService = userService;
     }
+    @PostMapping("/create")
+    public ResponseEntity<String> create(@RequestBody ContentDTO contentDTO, Authentication authentication) {
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
 
-    @Override
-    public ResponseEntity<?> create(@RequestBody Content content) {
-        Content savedContent = contentService.createContent(content);
-        if (content != null) {
-            return new ResponseEntity<>(savedContent, HttpStatus.CREATED);
+        if (user.getRole() == UserRole.CONTRIBUTOR || user.getRole() == UserRole.CURATOR) {
+            try {
+                contentService.createContent(contentDTO, user);
+                return new ResponseEntity<>("Content uploaded successfully!", HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("User not authorized to upload content.", HttpStatus.FORBIDDEN);
         }
-    }
-
-    @Override
-    public ResponseEntity<?> getAll() {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> getById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> edit(Content entity, Long aLong) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<?> delete(Long aLong) {
-        return null;
     }
 }

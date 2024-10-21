@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
-
+    @Column(name = "name", insertable = false, updatable = false)
     private String name;
     private String description;
     @ManyToOne
@@ -18,11 +19,12 @@ public abstract class Content {
     private boolean approved = false;
     private ContentCategory contentCategory;
 
-    public Content(String name, String description, User creator) {
+    public Content(String name, String description, User creator, ContentCategory contentCategory) {
         this.creationDate = LocalDateTime.now();
         this.name = name;
         this.description = description;
         this.creator = creator;
+        this.contentCategory = contentCategory;
     }
 
     protected Content(){

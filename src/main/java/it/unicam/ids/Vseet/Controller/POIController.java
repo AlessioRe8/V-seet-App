@@ -1,8 +1,6 @@
 package it.unicam.ids.Vseet.Controller;
 
 import it.unicam.ids.Vseet.Model.Entities.POI.PointOfInterest;
-import it.unicam.ids.Vseet.Model.Entities.Position;
-import it.unicam.ids.Vseet.Model.Repositories.POIRepository;
 import it.unicam.ids.Vseet.Model.Services.POIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,7 @@ public class POIController implements SpringController<PointOfInterest, Long> {
     }
 
     @Override
-    public ResponseEntity<?> create(PointOfInterest entity) {
+    public ResponseEntity<?> create(PointOfInterest pointOfInterest) {
         return null;
     }
 

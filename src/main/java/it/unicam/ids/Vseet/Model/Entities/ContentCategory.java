@@ -7,5 +7,6 @@ public enum ContentCategory {
     NATURE,
     ENTERTAINMENT,
     SERVICE,
+    ITINERARY,
     OTHER
 }
