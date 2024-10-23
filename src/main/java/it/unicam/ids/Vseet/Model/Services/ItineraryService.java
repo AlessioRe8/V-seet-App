@@ -1,6 +1,7 @@
 package it.unicam.ids.Vseet.Model.Services;
 
 import it.unicam.ids.Vseet.Model.Entities.Content;
+import it.unicam.ids.Vseet.Model.Entities.ContentCategory;
 import it.unicam.ids.Vseet.Model.Entities.Itinerary;
 import it.unicam.ids.Vseet.Model.Entities.User;
 import it.unicam.ids.Vseet.Model.Exceptions.ContentNotFoundException;
@@ -17,8 +18,8 @@ public class ItineraryService implements SpringService{
         this.itineraryRepository = itineraryRepository;
     }
 
-    public Itinerary createItinerary(String name, String description, User creator, List<Content> pointsOfInterest) {
-        Itinerary itinerary = new Itinerary(name, description, creator,pointsOfInterest);
+    public Itinerary createItinerary(String name, String description, User creator, ContentCategory category, List<Content> pointsOfInterest) {
+        Itinerary itinerary = new Itinerary(name, description, creator,category, pointsOfInterest);
         return itineraryRepository.save(itinerary);
     }
 

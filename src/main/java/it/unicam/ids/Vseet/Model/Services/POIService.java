@@ -1,23 +1,29 @@
 package it.unicam.ids.Vseet.Model.Services;
 
 import it.unicam.ids.Vseet.Model.Entities.ContentCategory;
+import it.unicam.ids.Vseet.Model.Entities.POI.ConcretePointOfInterest;
+import it.unicam.ids.Vseet.Model.Entities.POI.LogicPointOfInterest;
 import it.unicam.ids.Vseet.Model.Entities.POI.PointOfInterest;
 import it.unicam.ids.Vseet.Model.Entities.POI.PointOfInterestFactory;
 import it.unicam.ids.Vseet.Model.Entities.Position;
 import it.unicam.ids.Vseet.Model.Entities.User;
-import it.unicam.ids.Vseet.Model.Repositories.POIRepository;
+import it.unicam.ids.Vseet.Model.Repositories.ConcretePOIRepository;
+import it.unicam.ids.Vseet.Model.Repositories.LogicPOIRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class POIService implements SpringService{
     private PointOfInterestFactory pointOfInterestFactory;
-    private POIRepository poiRepository;
+    private ConcretePOIRepository concretePOIRepository;
+    private LogicPOIRepository logicPOIRepository;
 
     @Autowired
-    public POIService(PointOfInterestFactory pointOfInterestFactory, POIRepository poiRepository) {
+    public POIService(PointOfInterestFactory pointOfInterestFactory, ConcretePOIRepository concretePOIRepository,
+                      LogicPOIRepository logicPOIRepository) {
         this.pointOfInterestFactory = pointOfInterestFactory;
-        this.poiRepository = poiRepository;
+        this.concretePOIRepository = concretePOIRepository;
+        this.logicPOIRepository = logicPOIRepository;
     }
 
     public PointOfInterest createPointOfInterest(String type, String name, String description,
@@ -25,6 +31,11 @@ public class POIService implements SpringService{
                                                  Position position) {
         PointOfInterest poi = pointOfInterestFactory.createPOI(type, name, description, category,
                 creator, position);
-        return poiRepository.save(poi);
+        if (poi instanceof ConcretePointOfInterest) {
+            concretePOIRepository.save((ConcretePointOfInterest) poi);
+        } else if (poi instanceof LogicPointOfInterest) {
+            logicPOIRepository.save((LogicPointOfInterest) poi);
+        }
+        return poi;
     }
 }

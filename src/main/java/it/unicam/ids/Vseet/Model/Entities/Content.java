@@ -10,19 +10,20 @@ public abstract class Content {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    private String name;
-    private String description;
+    String name;
+    String description;
     @ManyToOne
-    private User creator;
-    private LocalDateTime creationDate;
-    private boolean approved = false;
-    private ContentCategory contentCategory;
+    User creator;
+    LocalDateTime creationDate;
+    boolean approved = false;
+    ContentCategory contentCategory;
 
-    public Content(String name, String description, User creator) {
+    public Content(String name, String description, User creator, ContentCategory category) {
         this.creationDate = LocalDateTime.now();
         this.name = name;
         this.description = description;
         this.creator = creator;
+        this.contentCategory = category;
     }
 
     protected Content(){
