@@ -8,7 +8,6 @@ public class Position {
     private double latitude;
 
     private double longitude;
-
     public Position() {}
 
     public Position(double latitude, double longitude) {

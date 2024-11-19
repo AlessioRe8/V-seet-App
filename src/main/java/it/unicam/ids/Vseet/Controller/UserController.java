@@ -1,43 +1,60 @@
 package it.unicam.ids.Vseet.Controller;
 
 import it.unicam.ids.Vseet.Model.Entities.User;
-import it.unicam.ids.Vseet.Model.Repositories.UserRepository;
+import it.unicam.ids.Vseet.Model.Entities.UserRole;
+import it.unicam.ids.Vseet.Model.Exceptions.UserNotFoundException;
+import it.unicam.ids.Vseet.Model.Services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@PreAuthorize("hasRole('PLATFORM_MANAGER')")
 @RequestMapping("/users")
-public class UserController implements SpringController<User, Long> {
+public class UserController {
 
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @Override
-    public ResponseEntity<?> create(User entity) {
-        return null;
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody User user) {
+        User savedUser = userService.create(user);
+        if (savedUser != null) {
+            return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @Override
+    @GetMapping
+    public ResponseEntity<?> getById(@RequestParam("id") Long id) throws UserNotFoundException{
+        return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
     public ResponseEntity<?> getAll() {
-        return null;
+        return new ResponseEntity<>(userService.getAll(),HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<?> getById(Long aLong) {
-        return null;
+    @PutMapping("/roles")
+    public ResponseEntity<?> editUserRole(@RequestParam("id") Long id,
+                                          @RequestParam("newRole") UserRole newRole) throws UserNotFoundException {
+        User user = userService.editUserRole(id, newRole);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<?> edit(User entity, Long aLong) {
-        return null;
+    @DeleteMapping
+    public ResponseEntity<?> delete(@RequestParam("id") Long id) throws UserNotFoundException {
+        userService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<?> delete(Long aLong) {
-        return null;
+    @PutMapping
+    public ResponseEntity<?> edit(Long id) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }

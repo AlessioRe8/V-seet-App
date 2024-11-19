@@ -15,7 +15,7 @@ public abstract class Content {
     @ManyToOne
     User creator;
     LocalDateTime creationDate;
-    boolean approved = false;
+    boolean verified = false;
     ContentCategory contentCategory;
 
     public Content(String name, String description, User creator, ContentCategory category) {
@@ -29,8 +29,6 @@ public abstract class Content {
     protected Content(){
         this.creationDate = LocalDateTime.now();
     };
-
-    public abstract void approve();
 
     public String getName() {
         return name;
@@ -52,12 +50,12 @@ public abstract class Content {
         return creationDate;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public boolean isVerified() {
+        return verified;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void verify() {
+        this.verified = true;
     }
 
     public Long getID() {

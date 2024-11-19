@@ -17,10 +17,6 @@ public class LogicPointOfInterest extends Content implements PointOfInterest {
         super();
     }
     @Override
-    public void approve() {
-        setApproved(true);
-    }
-    @Override
     public String getType() {
         return "Logic";
     }

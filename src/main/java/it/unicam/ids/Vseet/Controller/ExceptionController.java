@@ -1,15 +1,14 @@
 package it.unicam.ids.Vseet.Controller;
 
-import it.unicam.ids.Vseet.Model.Entities.Content;
-import it.unicam.ids.Vseet.Model.Entities.User;
 import it.unicam.ids.Vseet.Model.Exceptions.ContentNotFoundException;
 import it.unicam.ids.Vseet.Model.Exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.nio.file.AccessDeniedException;
 
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
@@ -23,4 +22,11 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> handleUserNotFound(UserNotFoundException exception) {
         return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<String>handleAccessDenied(AccessDeniedException exception) {
+        return new ResponseEntity<>("Access denied. You do not have permission for that", HttpStatus.FORBIDDEN);
+    }
+
 }
+

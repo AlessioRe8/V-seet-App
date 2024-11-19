@@ -17,11 +17,6 @@ public class ConcretePointOfInterest extends Content implements PointOfInterest 
     }
 
     @Override
-    public void approve() {
-        setApproved(true);
-    }
-
-    @Override
     public String getType() {
         return "Concrete";
     }

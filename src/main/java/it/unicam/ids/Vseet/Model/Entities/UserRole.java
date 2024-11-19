@@ -1,12 +1,11 @@
 package it.unicam.ids.Vseet.Model.Entities;
 
 public enum UserRole {
-    CONTRIBUTOR,
-    AUTHORIZED_CONTRIBUTOR,
-    ANIMATOR,
-    CURATOR,
-    PLATFORM_MANAGER,
-    TOURIST,
-    AUTHENTICATED_TOURIST,
-    OSM_SYSTEM
+    CONTRIBUTOR,                //Can upload contents and need verification.
+    AUTHORIZED_CONTRIBUTOR,     //Can upload contents without verification.
+    ANIMATOR,                   //Can upload contests of contents and can verify content.
+    CURATOR,                    //Can upload contents and can verify content.
+    PLATFORM_MANAGER,           //Roles administrator, can verify contents.
+    TOURIST,                    //Can see available contents.
+    AUTHENTICATED_TOURIST,      //Can upload content that needs verification.
 }
