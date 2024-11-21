@@ -489,7 +489,19 @@
 					"name": "getItineraries",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/itineraries/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"itineraries",
+								"list"
+							]
+						}
 					},
 					"response": []
 				},
@@ -773,7 +785,7 @@
 				{
 					"name": "editContent (Not implemented)",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://localhost:8080/contents",

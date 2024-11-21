@@ -6,6 +6,5 @@ public enum UserRole {
     ANIMATOR,                   //Can upload contests of contents and can verify content.
     CURATOR,                    //Can upload contents and can verify content.
     PLATFORM_MANAGER,           //Roles administrator, can verify contents.
-    TOURIST,                    //Can see available contents.
-    AUTHENTICATED_TOURIST,      //Can upload content that needs verification.
+    TOURIST,                    //Can see available contents, can upload content that needs verification.
 }

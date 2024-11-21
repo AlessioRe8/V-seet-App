@@ -29,20 +29,17 @@ public class ContentService {
         this.itineraryRepository = itineraryRepository;
     }
 
-    public Content createContent(Content content) {
-        return contentRepository.save(content);
-    }
 
     public Content verify(Long id) throws ContentNotFoundException {
 
-        if (contentRepository.findByID(id).orElseThrow() instanceof LogicPointOfInterest) {
+        if (contentRepository.findById(id).orElseThrow() instanceof LogicPointOfInterest) {
             Content content = contentRepository.findById(id).orElseThrow();
             content.verify();
             logicPOIRepository.save((LogicPointOfInterest) content);
             contentRepository.save(content);
             return content;
 
-        } else if (contentRepository.findByID(id).orElseThrow() instanceof ConcretePointOfInterest) {
+        } else if (contentRepository.findById(id).orElseThrow() instanceof ConcretePointOfInterest) {
             Content content = contentRepository.findById(id).orElseThrow();
             content.verify();
             concretePOIRepository.save((ConcretePointOfInterest) content);
@@ -76,6 +73,6 @@ public class ContentService {
     }
 
     public Content getById(Long id) throws ContentNotFoundException{
-            return contentRepository.findByID(id).orElseThrow(ContentNotFoundException::new);
+            return contentRepository.findById(id).orElseThrow(ContentNotFoundException::new);
     }
 }

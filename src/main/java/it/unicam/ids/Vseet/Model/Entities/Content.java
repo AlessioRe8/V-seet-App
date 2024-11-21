@@ -28,7 +28,7 @@ public abstract class Content {
 
     protected Content(){
         this.creationDate = LocalDateTime.now();
-    };
+    }
 
     public String getName() {
         return name;
@@ -36,18 +36,6 @@ public abstract class Content {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
     }
 
     public boolean isVerified() {
@@ -58,20 +46,47 @@ public abstract class Content {
         this.verified = true;
     }
 
-    public Long getID() {
-        return ID;
+    public String getDescription() {
+        return description;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public User getCreator() {
         return creator;
     }
+
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
     public ContentCategory getContentCategory() {
         return contentCategory;
     }
+
     public void setContentCategory(ContentCategory contentCategory) {
         this.contentCategory = contentCategory;
     }
 
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
 }

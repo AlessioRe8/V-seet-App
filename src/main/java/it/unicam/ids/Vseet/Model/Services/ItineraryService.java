@@ -4,7 +4,6 @@ import it.unicam.ids.Vseet.Model.Entities.*;
 import it.unicam.ids.Vseet.Model.Exceptions.ContentNotFoundException;
 import it.unicam.ids.Vseet.Model.Repositories.ContentRepository;
 import it.unicam.ids.Vseet.Model.Repositories.ItineraryRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -71,7 +70,7 @@ public class ItineraryService {
     public Itinerary addContent(Long idItinerary, Long idContent) throws ContentNotFoundException{
         Itinerary itinerary = itineraryRepository.findById(idItinerary).orElse(null);
         if (itinerary != null) {
-            itinerary.addContent(contentRepository.findByID(idContent).orElseThrow(ContentNotFoundException::new));
+            itinerary.addContent(contentRepository.findById(idContent).orElseThrow(ContentNotFoundException::new));
             itineraryRepository.save(itinerary);
             contentRepository.save(itinerary);
             return itinerary;

@@ -6,7 +6,6 @@ import it.unicam.ids.Vseet.Model.Exceptions.UserAlreadyExistsException;
 import it.unicam.ids.Vseet.Model.Exceptions.UserNotFoundException;
 import it.unicam.ids.Vseet.Model.Repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,7 @@ public class UserService {
     public void loadUsers() {
         User user1 = new User("Alessio", passwordEncoder.encode("password"), "alessio.re@example.it", UserRole.PLATFORM_MANAGER);
         User user2 = new User("Andrea", passwordEncoder.encode("password"), "andrea.bianchi@example.it", UserRole.ANIMATOR);
-        User user3 = new User("Mario", passwordEncoder.encode("password"), "mario.rossi@example.it", UserRole.AUTHENTICATED_TOURIST);
+        User user3 = new User("Mario", passwordEncoder.encode("password"), "mario.rossi@example.it", UserRole.CONTRIBUTOR);
         User user4 = new User("Anna", passwordEncoder.encode("password"), "anna.verdi@example.it", UserRole.TOURIST);
         userRepository.save(user1);
         userRepository.save(user2);

@@ -1,10 +1,9 @@
 package it.unicam.ids.Vseet.Model.Entities;
 
 public class ItineraryDTO {
-    private String name;
-
-    private String description;
-    private ContentCategory category;
+    private final String name;
+    private final String description;
+    private final ContentCategory category;
     public ItineraryDTO(String name, String description, ContentCategory category) {
         this.name = name;
         this.description = description;

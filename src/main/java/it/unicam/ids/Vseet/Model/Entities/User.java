@@ -60,4 +60,12 @@ public class User{
     public void setRole(UserRole role) {
         this.role = role;
     }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
