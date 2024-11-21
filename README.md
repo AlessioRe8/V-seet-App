@@ -18,10 +18,11 @@ It's not intended as a final application, and may be extended with many more int
 the work was concluded in the way the project specification asked in the University course.
 
 ## Run
-To completely understand the application, download and install Postman 
+1. To completely understand the application, download and install Postman 
 to execute HTTP requests on the system.
-Next you will need to run this code as a Springboot application and check the [utils directory](utils).
-You will need to import into Postman the <code>Vseet-App-requests.postman_collection</code> file. Once done
+2. Next you will need to run this code as a Springboot application and check the [utils directory](utils).
+You will need to import into Postman the <code>Vseet-App-requests.postman_collection</code> file.
+3. Once done
 you are free to navigate the Postman requests.
 The application loads 4 basic users to log in, to try the different
 scenarios and permissions the system puts you in.
