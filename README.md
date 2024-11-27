@@ -8,7 +8,7 @@ system as "Contents".
 ## Project
 The project was intended to represent a working flow of an organisation between several people,
 including the analysis phase, and the defining of project standards and pre-requisites.
-Inside the [utils directory](utils) there is the Visual Paradigm project, with all the details
+Inside the [utils directory](utils) there is the Visual Paradigm project (<code>Vseet-project.vpp</code>), with all the details
 about the evolving of the project. The time frame was 1 week per iteration and the project was concluded
 in a time span of 4 weeks in total.
 
